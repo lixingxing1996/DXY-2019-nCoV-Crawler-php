@@ -1,7 +1,5 @@
 <?php
 
-header("content-type:test/html:charset=utf-8");
-
 // 引入数据文件
 require 'vendor/autoload.php';
 use QL\QueryList;
@@ -34,18 +32,19 @@ try {
     $text = $ql->find('#getTimelineService')->text();
     $news_json = get_between($text,'getTimelineService = ','}catch');
 // 保存
-    file_put_contents($json_path.'info.json',$json);
+    file_put_contents($json_path.'info.json',$overall_json);
     $path = $json_path.$crawler_time;
 // 创建文件夹
     if (is_dir($path)){
-        echo "对不起！目录 " . $path . " 已经存在！<br/>";
+        echo date('Y年y月d日H时m分s秒').":对不起！目录 " . $path . " 已经存在！<br/>";
     }else{
         //第三个参数是“true”表示能创建多级目录，iconv防止中文目录乱码
         $res=mkdir(iconv("UTF-8", "GBK", $path),0777,true);
         if ($res){
-            echo "目录 $path 创建成功";
+            echo date('Y年y月d日H时m分s秒').":目录 $path 创建成功";
         }else{
-            echo "目录 $path 创建失败";
+            echo date('Y年y月d日H时m分s秒').":目录 $path 创建失败";
+            exit;
         }
         echo "<br/>";
     }
@@ -55,7 +54,7 @@ try {
     file_put_contents($path .'/area.json',$area_json);
     file_put_contents($path .'/abroad.json',$abroad_json);
     file_put_contents($path .'/news.json',$news_json);
-
+    echo date('Y年y月d日H时m分s秒').':抓取成功';
 
 } catch (\Exception $e) {
     echo $e->getMessage();

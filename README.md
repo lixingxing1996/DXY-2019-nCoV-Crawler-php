@@ -9,3 +9,7 @@
 - 创建定时访问任务，每隔一段时间访问一次 data.php 文件
 
 - 赋予 json文件夹 775权限 ` chmod -R 775 json `
+
+## API网站
+
+[2019新型冠状病毒疫情爬虫](https://pneumonia.7rcv.com/index.html)
